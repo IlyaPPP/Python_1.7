@@ -7,14 +7,53 @@
 # имя или фамилию человека)
 # 4. Использование функций. Ваша программа не должна быть линейной.
 
+import csv
+
+
 def work_with_phonebook():
     choice = show_menu()
     phone_book = read_csv('phonebook.csv')
+    return
+
+
+def show_menu():
+
+    return int(input())
+
+
+def print_result(a):
+    return print(a)
+
+
+def get_search_name():
+    with open("phonebook.csv"):
+        if show_menu() in ("phonebook.csv"):
+            return
+
+
+def find_by_name(a, b):
+    return a + b
+
+
+def find_by_number(a, b):
+    return a * b
+
+
+def get_search_number():
+    return print("d")
+
+
+def get_new_user(d):
+    return d
+
+
+def add_user(a):
+    return a
 
 
 while (choice != 6):
     if choice == 1:
-        print_result(phone_book)
+        print_result("phone_book")
     elif choice == 2:
         name = get_search_name()
         print(find_by_name(phone_book, name))
@@ -31,18 +70,18 @@ while (choice != 6):
     choice = show_menu()
 
 
-def read_csv(filename: str) -> list:
+def read_csv(filename: str):
     data = []
     fields = ["Фамилия", "Имя", "Телефон", "Описание"]
-    with open(phoneboock.csv, 'r', encoding='utf-8'):
-        for line in fin:
-            record = dict(zip(fields, line))
-            date.append(record)
-    return date
+    with open(filename, 'r', encoding='utf-8'):
+        for line in fields:
+            record = dict(zip(fields, line).__str__)
+            data.append(record)
+    return data
 
 
 def write_csv(filename: str, data: list):
-    with open(phoneboock.csv, 'w', encoding='utf-8'):
+    with open(filename, 'w', encoding='utf-8'):
         for i in range(len(data)):
             s = ""
             for v in data[i].values():
