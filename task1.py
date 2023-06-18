@@ -10,80 +10,115 @@
 import csv
 
 
-def work_with_phonebook():
-    choice = show_menu()
-    phone_book = read_csv('phonebook.csv')
-    return
-
-
 def show_menu():
+    print("1 - Просмотреть телефонную книгу")
+    print("2 - Поиск по имени")
+    print("3 - Поиск по номеру телефона")
+    print("4 - Добавить пользовтеля в первый список 'Phonebook.csv'")
+    print("5 - Добавить'")
+    return int(input("Введите цифру: "))
 
-    return int(input())
 
-
-def print_result(a):
-    return print(a)
+def print_result(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            print(line)
 
 
 def get_search_name():
-    with open("phonebook.csv"):
-        if show_menu() in ("phonebook.csv"):
-            return
+    x = input("Введите имя или фамилию: ")
+    return x
 
 
-def find_by_name(a, b):
-    return a + b
-
-
-def find_by_number(a, b):
-    return a * b
+def find_by_name(filename: str, x):
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            if x in line:
+                return line
 
 
 def get_search_number():
-    return print("d")
+    x = input("Введите номер телефона: ")
+    return x
 
 
-def get_new_user(d):
-    return d
+def find_by_number(filename, x):
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            if x in line:
+                return line
 
 
-def add_user(a):
-    return a
+def get_new_user(filename):
+    return
 
 
-while (choice != 6):
-    if choice == 1:
-        print_result("phone_book")
-    elif choice == 2:
-        name = get_search_name()
-        print(find_by_name(phone_book, name))
-    elif choice == 3:
-        number = get_search_number()
-        print(find_by_number(phone_book, number))
-    elif choice == 4:
-        user_data = get_new_user()
-        add_user(phone_book, user_data)
-        write_csv('phonebook.csv', phone_book)
-    elif choice == 5:
-        file_name = get_file_name()
-        write_txt(file_name, phone_book)
-    choice = show_menu()
+def add_user(filename, data):
+    fields = ["Фамилию", "Имя", "Телефон", "Описание"]
+    data = ''
+    for i in range(4):
+        data += (input(f"Введите {fields[i]}: ")) + ", "
+    with open(filename, 'a', encoding="utf-8") as file:
+        file.write(data)
+    return data
 
 
 def read_csv(filename: str):
     data = []
     fields = ["Фамилия", "Имя", "Телефон", "Описание"]
-    with open(filename, 'r', encoding='utf-8'):
-        for line in fields:
-            record = dict(zip(fields, line).__str__)
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            record = dict(zip(fields, line))
             data.append(record)
     return data
 
 
 def write_csv(filename: str, data: list):
-    with open(filename, 'w', encoding='utf-8'):
+    with open(filename, 'w', encoding='utf-8') as file:
         for i in range(len(data)):
-            s = ""
+            s = ''
+            i = i
+            data1 = dict(data[i])
+            for v in data1.values():
+                s += v + ', '
+            file.write(f'{s[:-1]}\n')
+
+
+def get_file_name(b):
+    return b
+
+
+def write_txt(phone_book, filename):
+    with open(filename, 'w', encoding='utf-8') as file:
+        for i in range(len(data)):
+            s = ''
             for v in data[i].values():
-                s += v + ','
-            fout.write(f'{s[:-1]}\n')
+                s += v + ', '
+        file.write(f'{s[:-1]}\n')
+
+
+def work_with_phonebook():
+    choice = show_menu()
+    phonebook = read_csv('phonebook.csv')
+    phone_book = 'phone_book.txt'
+
+    while (choice != 6):
+        if choice == 1:
+            print_result(phone_book)
+        elif choice == 2:
+            name = get_search_name()
+            print(find_by_name(phone_book, name))
+        elif choice == 3:
+            number = get_search_number()
+            print(find_by_number(phone_book, number))
+        elif choice == 4:
+            user_data = get_new_user(phone_book)
+            add_user(phone_book, user_data)
+            write_csv('phonebook.csv', phonebook,)
+        elif choice == 5:
+            file_name = get_file_name()
+            write_txt(file_name, phone_book)
+        choice = show_menu()
+
+
+work_with_phonebook()
